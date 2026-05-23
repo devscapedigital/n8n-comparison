@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bristol Hose & Fitting — Website Comparison</title>
+  <title>Bristol Hose & Fitting — Website Comparison | Devscape Digital</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -47,6 +47,13 @@
 
     .headline strong { color: #fff; }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
     .badge {
       background: rgba(108,99,255,0.15);
       color: #6c63ff;
@@ -56,6 +63,28 @@
       padding: 4px 12px;
       border-radius: 999px;
       white-space: nowrap;
+    }
+
+    .badge.live {
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+      border-color: rgba(34,197,94,0.3);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
     .panels {
@@ -73,27 +102,27 @@
     }
 
     .panel-header {
-      height: 40px;
+      height: 44px;
       display: flex;
       align-items: center;
       padding: 0 16px;
       gap: 8px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       flex-shrink: 0;
     }
 
     .panel-header.old {
-      background: rgba(255,101,132,0.06);
+      background: rgba(255,101,132,0.07);
       color: #ff6584;
       border-right: 1px solid rgba(255,255,255,0.06);
     }
 
     .panel-header.new {
-      background: rgba(108,99,255,0.06);
+      background: rgba(108,99,255,0.07);
       color: #6c63ff;
     }
 
@@ -107,34 +136,38 @@
     .old .dot { background: #ff6584; box-shadow: 0 0 6px #ff6584; }
     .new .dot { background: #6c63ff; box-shadow: 0 0 6px #6c63ff; }
 
+    .panel-title { font-size: 11px; font-weight: 700; }
+
     .url-label {
       font-size: 10px;
       font-weight: 400;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.25);
       text-transform: none;
       letter-spacing: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 200px;
-      margin-left: auto;
+      max-width: 220px;
+      margin-left: 4px;
     }
 
     .open-btn {
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.35);
       font-size: 10px;
+      font-weight: 600;
       text-decoration: none;
-      padding: 3px 8px;
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 4px;
       transition: all 0.2s;
       white-space: nowrap;
-      margin-left: 8px;
+      margin-left: auto;
     }
 
     .open-btn:hover {
       color: #fff;
-      border-color: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.05);
     }
 
     iframe {
@@ -142,77 +175,41 @@
       flex: 1;
       border: none;
       background: #fff;
+      display: block;
     }
 
     .divider {
-      width: 3px;
-      background: rgba(255,255,255,0.06);
+      width: 4px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.06), transparent);
       flex-shrink: 0;
       position: relative;
+      cursor: col-resize;
     }
 
-    .divider::after {
-      content: '⟺';
+    .divider-handle {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background: #1c1c26;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 999px;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .iframe-fallback {
-      display: none;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 16px;
-      padding: 32px;
-      text-align: center;
-      background: #13131a;
-    }
-
-    .iframe-fallback.visible { display: flex; }
-
-    .fallback-icon { font-size: 40px; opacity: 0.4; }
-
-    .fallback-text {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      max-width: 280px;
-      line-height: 1.6;
-    }
-
-    .fallback-btn {
-      display: inline-block;
-      background: #ff6584;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 8px;
       font-size: 13px;
-      font-weight: 600;
-      transition: opacity 0.2s;
+      color: rgba(255,255,255,0.5);
+      user-select: none;
     }
-
-    .fallback-btn.new-site { background: #6c63ff; }
-    .fallback-btn:hover { opacity: 0.85; }
 
     .insight-bar {
       background: #0d0d14;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 8px 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 7px 24px;
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.3);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -221,32 +218,32 @@
       white-space: nowrap;
     }
 
-    .insight-bar strong { color: #ff6584; }
-    .insight-bar span { color: rgba(255,255,255,0.2); margin: 0 4px; }
+    .insight-bar strong { color: #ff6584; font-weight: 600; }
+    .insight-sep { color: rgba(255,255,255,0.15); margin: 0 6px; }
 
     footer {
       background: #13131a;
       border-top: 1px solid rgba(255,255,255,0.06);
-      height: 40px;
+      height: 38px;
       display: flex;
       align-items: center;
       padding: 0 24px;
-      gap: 24px;
+      gap: 20px;
       flex-shrink: 0;
     }
 
     .footer-stat {
       font-size: 11px;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.25);
     }
 
-    .footer-stat strong { color: rgba(255,255,255,0.7); }
+    .footer-stat strong { color: rgba(255,255,255,0.65); }
 
     .score-pill {
       background: rgba(255,101,132,0.1);
       color: #ff6584;
       border: 1px solid rgba(255,101,132,0.2);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       padding: 2px 10px;
       border-radius: 999px;
@@ -254,11 +251,22 @@
 
     .powered {
       font-size: 11px;
-      color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.15);
       margin-left: auto;
     }
 
     .powered span { color: #6c63ff; }
+
+    .redesign-note {
+      background: rgba(108,99,255,0.08);
+      border: 1px solid rgba(108,99,255,0.2);
+      color: #6c63ff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.03em;
+    }
   </style>
 </head>
 <body>
@@ -266,9 +274,14 @@
   <header>
     <div class="logo">Devscape<span>Digital</span></div>
     <div class="headline">
-      <strong>Bristol Hose & Fitting</strong> — Before &amp; After Website Comparison
+      <strong>Bristol Hose & Fitting</strong> — We redesigned your website
     </div>
-    <div class="badge">✦ Live Preview</div>
+    <div class="header-right">
+      <div class="badge live">
+        <div class="live-dot"></div>
+        Live Comparison
+      </div>
+    </div>
   </header>
 
   <div class="panels">
@@ -276,83 +289,50 @@
     <div class="panel" id="panel-old">
       <div class="panel-header old">
         <div class="dot"></div>
-        Current Website
+        <span class="panel-title">Your Current Website</span>
         <span class="url-label">https://www.bristolhose.com/</span>
         <a href="https://www.bristolhose.com/" target="_blank" class="open-btn">Open ↗</a>
       </div>
-   <iframe
-  id="iframe-old"
-  src="https://www.bristolhose.com/"
-  title="Current website"
-  loading="lazy"
-></iframe>
-      <div class="iframe-fallback" id="fallback-old">
-        <div class="fallback-icon">🔒</div>
-        <div class="fallback-text">This website blocks iframe embedding. Click below to view it directly.</div>
-        <a href="https://www.bristolhose.com/" target="_blank" class="fallback-btn">View Current Site ↗</a>
-      </div>
+      <iframe
+        id="iframe-old"
+        src="https://www.bristolhose.com/"
+        title="Current website"
+      ></iframe>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider">
+      <div class="divider-handle">⟺</div>
+    </div>
 
     <div class="panel" id="panel-new">
       <div class="panel-header new">
         <div class="dot"></div>
-        New Website — Redesigned by Devscape Digital
+        <span class="panel-title">Your New Website — by Devscape Digital</span>
         <span class="url-label">https://bristolhose.lovable.app/</span>
         <a href="https://bristolhose.lovable.app/" target="_blank" class="open-btn">Open ↗</a>
       </div>
- <iframe
-  id="iframe-new"
-  src="https://bristolhose.lovable.app/"
-  title="New redesigned website"
-  loading="lazy"
-></iframe>
-      <div class="iframe-fallback" id="fallback-new">
-        <div class="fallback-icon">🔗</div>
-        <div class="fallback-text">Click below to view the new redesigned website.</div>
-        <a href="https://bristolhose.lovable.app/" target="_blank" class="fallback-btn new-site">View New Site ↗</a>
-      </div>
+      <iframe
+        id="iframe-new"
+        src="https://bristolhose.lovable.app/"
+        title="New redesigned website"
+      ></iframe>
     </div>
 
   </div>
 
   <div class="insight-bar">
-    ⚠ Audit finding: <strong>The site's design feels outdated and lacks a clear value proposition above the fold</strong>
-    <span>·</span>
-    Opportunity: A modern redesign can help increase conversions and establish the company as a leader in the industrial hose and fittings industry
+    ⚠ Current site issue: <strong>The site's design feels outdated and lacks a clear value proposition above the fold</strong>
+    <span class="insight-sep">·</span>
+    A modern redesign can help increase conversions and establish the company as a leader in the industrial hose and fittings industry
   </div>
 
   <footer>
     <div class="score-pill">Score 5/10</div>
     <div class="footer-stat">Industry: <strong>Industrial hose / fittings</strong></div>
     <div class="footer-stat">Lead quality: <strong>WARM LEAD</strong></div>
-    <div class="footer-stat">Redesigned by: <strong>Devscape Digital</strong></div>
+    <div class="redesign-note">✦ Redesigned by Devscape Digital</div>
     <div class="powered">Powered by <span>DevscapeDigital.com</span></div>
   </footer>
-
-  <script>
-    function showFallback(side) {
-      const iframe = document.getElementById('iframe-' + side);
-      const fallback = document.getElementById('fallback-' + side);
-      if (iframe) iframe.style.display = 'none';
-      if (fallback) fallback.classList.add('visible');
-    }
-
-    setTimeout(() => {
-      ['old', 'new'].forEach(side => {
-        const iframe = document.getElementById('iframe-' + side);
-        try {
-          const doc = iframe.contentDocument || iframe.contentWindow.document;
-          if (!doc || doc.URL === 'about:blank' || doc.body === null) {
-            showFallback(side);
-          }
-        } catch(e) {
-          showFallback(side);
-        }
-      });
-    }, 10000);
-  </script>
 
 </body>
 </html>
